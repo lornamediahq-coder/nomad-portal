@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   }
 
   const { error } = await supabase
-    .from("waitlist")
+    .from("waitlist_emails")
     .insert([{ email }]);
 
   if (error) {

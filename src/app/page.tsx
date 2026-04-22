@@ -1,3 +1,4 @@
+import Link from "next/link";
 import WaitlistForm from "@/components/WaitlistForm";
 
 const pillars = [
@@ -89,6 +90,13 @@ export default function Home() {
         >
           Join the Portal
         </a>
+
+        <p className="mt-4 text-sm text-stone-500">
+          Already have an account?{" "}
+          <Link href="/sign-in" className="text-stone-700 font-medium hover:text-stone-900 underline underline-offset-2 transition-colors">
+            Sign in
+          </Link>
+        </p>
       </section>
 
       {/* Four Pillars */}
@@ -142,6 +150,21 @@ export default function Home() {
       {/* Footer */}
       <footer className="px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-6xl mx-auto text-stone-400 text-sm">
         <span className="font-medium text-stone-600">Nomad Portal</span>
+
+        <nav className="flex items-center gap-6">
+          <Link
+            href="/sign-in"
+            className="text-stone-500 hover:text-stone-700 transition-colors font-medium"
+          >
+            Sign in
+          </Link>
+          <Link
+            href="/sign-up"
+            className="px-4 py-2 rounded-xl bg-stone-900 text-white text-xs font-medium hover:bg-stone-700 transition-colors"
+          >
+            Sign up
+          </Link>
+        </nav>
 
         <nav className="flex items-center gap-6">
           <a
