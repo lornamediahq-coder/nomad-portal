@@ -1,4 +1,4 @@
-import Link from "next/link";
+import EnterPortalButton from "./EnterPortalButton";
 
 const ARCHETYPES: Record<string, { emoji: string; tagline: string; description: string; colour: string }> = {
   Explorer: {
@@ -6,7 +6,7 @@ const ARCHETYPES: Record<string, { emoji: string; tagline: string; description: 
     tagline: "The world is your research lab.",
     description:
       "You're energised by discovery — new places, new people, new ideas. You move fast, adapt easily, and collect experiences the way others collect assets. The Portal will help you turn that curiosity into momentum.",
-    colour: "#e8b84b",
+    colour: "#e8a020",
   },
   Builder: {
     emoji: "🔨",
@@ -27,7 +27,7 @@ const ARCHETYPES: Record<string, { emoji: string; tagline: string; description: 
     tagline: "You flow. Structure follows.",
     description:
       "You live by feel and resist rigid frameworks — and that's a strength. The Portal meets you where you are, offering just enough structure to protect your freedom without boxing it in.",
-    colour: "#4db6ac",
+    colour: "#2a9d8f",
   },
   Sovereign: {
     emoji: "👑",
@@ -45,6 +45,7 @@ export default async function ResultPage({
 }) {
   const { archetype } = await searchParams;
   const data = ARCHETYPES[archetype ?? ""] ?? ARCHETYPES["Explorer"];
+  const resolvedArchetype = archetype && ARCHETYPES[archetype] ? archetype : "Explorer";
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-5 py-16"
@@ -55,9 +56,8 @@ export default async function ResultPage({
           Your archetype
         </p>
 
-        {/* Emoji badge */}
         <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-6"
-             style={{ background: data.colour + "22", border: `2px solid ${data.colour}33` }}>
+             style={{ background: data.colour + "22", border: `2px solid ${data.colour}44` }}>
           {data.emoji}
         </div>
 
@@ -69,7 +69,7 @@ export default async function ResultPage({
           lineHeight: 1,
           marginBottom: "0.5rem",
         }}>
-          {archetype}
+          {resolvedArchetype}
         </h1>
 
         <p className="text-sm font-medium mb-6" style={{ color: data.colour, fontFamily: "var(--font-jost)" }}>
@@ -80,17 +80,7 @@ export default async function ResultPage({
           {data.description}
         </p>
 
-        <Link
-          href="/home"
-          className="inline-block w-full py-4 rounded-2xl text-sm font-medium tracking-wide text-center transition-opacity"
-          style={{
-            background: "#0F6E56",
-            color: "white",
-            fontFamily: "var(--font-jost)",
-          }}
-        >
-          Enter the Portal →
-        </Link>
+        <EnterPortalButton />
       </div>
     </div>
   );
