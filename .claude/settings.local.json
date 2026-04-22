@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git --yes)",
+      "Read(//Users/tashacole/**)",
+      "Bash(npx create-next-app@latest nomad-portal --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git --yes)",
+      "Bash(wait)",
+      "Bash(npm install *)",
+      "Bash(SUPABASE_URL=https://placeholder.supabase.co SUPABASE_SERVICE_ROLE_KEY=placeholder npx tsc --noEmit)",
+      "Bash(SUPABASE_URL=https://placeholder.supabase.co SUPABASE_SERVICE_ROLE_KEY=placeholder npm run build)",
+      "Bash(SUPABASE_URL=https://placeholder.supabase.co SUPABASE_SERVICE_ROLE_KEY=placeholder ./node_modules/.bin/next build)",
+      "Bash(SUPABASE_URL=https://placeholder.supabase.co SUPABASE_SERVICE_ROLE_KEY=placeholder npx next build)",
+      "Bash(echo \"BUILD_DONE:$?\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s http://localhost:3000)"
+    ]
+  }
+}
