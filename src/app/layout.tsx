@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+});
+
+const jost = Jost({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-jost",
+});
 
 export const metadata: Metadata = {
   title: "Nomad Portal — Reset. Rebuild. Resource. Connect.",
@@ -12,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} antialiased`}>
+    <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
       <body className="min-h-screen flex flex-col">{children}</body>
     </html>
   );
