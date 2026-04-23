@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase-browser";
 
@@ -12,8 +12,8 @@ export default function EnterPortalButton() {
     setLoading(true);
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
-    // Authenticated → go to dashboard. No session → go to sign-in.
-    router.push(user ? "/home" : "/sign-in");
+    if (!user) { router.push("/sign-in"); return; }
+    router.push("/onboarding/sprint-setup");
   }
 
   return (
