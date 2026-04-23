@@ -131,6 +131,17 @@ export default async function ProfilePage() {
 
       {/* Links */}
       <div className="rounded-3xl overflow-hidden" style={{ background: "white", border: "1.5px solid #e8e2d8" }}>
+        <Link href="/subscription" style={{ textDecoration: "none" }}>
+          <div className="px-5 py-4 flex items-center justify-between"
+               style={{ borderBottom: "1px solid #f0ece4" }}>
+            <p className="text-sm font-medium" style={{ color: "#1a1a18", fontFamily: "var(--font-jost)" }}>
+              Subscription
+            </p>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c8c4bc" strokeWidth={1.8} style={{ width: "16px", height: "16px" }}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+          </div>
+        </Link>
         <Link href="/whats-new" style={{ textDecoration: "none" }}>
           <div className="px-5 py-4 flex items-center justify-between"
                style={{ borderBottom: "1px solid #f0ece4" }}>

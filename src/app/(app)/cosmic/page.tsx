@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
 import BirthDataForm from "./BirthDataForm";
@@ -169,13 +170,13 @@ export default async function CosmicPage() {
           ))}
         </ul>
 
-        <button
-          disabled
-          className="w-full py-3.5 rounded-2xl text-sm font-medium tracking-wide"
-          style={{ background: "#0F6E56", color: "white", fontFamily: "var(--font-jost)", opacity: 0.7 }}
+        <Link
+          href="/subscription"
+          className="block w-full py-3.5 rounded-2xl text-sm font-medium tracking-wide text-center"
+          style={{ background: "#0F6E56", color: "white", fontFamily: "var(--font-jost)", textDecoration: "none" }}
         >
           Unlock Visionary ✦
-        </button>
+        </Link>
       </div>
     </div>
   );

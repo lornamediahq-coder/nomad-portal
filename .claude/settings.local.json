@@ -19,7 +19,9 @@
       "Bash(vercel --prod)",
       "Bash(vercel env *)",
       "Bash(supabase --version)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(node -e \"const s = require\\('stripe'\\); console.log\\(s.PACKAGE_VERSION\\)\")",
+      "Bash(node -e \"const Stripe = require\\('stripe'\\); const s = new Stripe\\('test'\\); console.log\\(s.getApiField\\('version'\\)\\)\")"
     ]
   }
 }

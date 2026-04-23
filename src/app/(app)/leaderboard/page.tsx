@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
+import UpgradeGate from "@/components/UpgradeGate";
 
 const ARCHETYPE_EMOJI: Record<string, string> = {
   Explorer: "🧭", Builder: "🔨", Visionary: "🔭", Wanderer: "🌊", Sovereign: "👑",
@@ -19,6 +20,33 @@ export default async function LeaderboardPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/sign-in");
+
+  const { data: profile } = await supabase
+    .from("users")
+    .select("tier")
+    .eq("id", user.id)
+    .single();
+
+  const tier = (profile?.tier as string) ?? "free";
+  if (tier === "free") {
+    return (
+      <div className="px-5 pt-6 pb-6 max-w-lg mx-auto flex flex-col gap-5">
+        <div>
+          <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "2.2rem", fontWeight: 500, color: "#1a1a18", lineHeight: 1.2 }}>
+            Leaderboard
+          </h1>
+          <p className="text-xs tracking-widest uppercase mt-1" style={{ color: "#0F6E56", fontFamily: "var(--font-jost)" }}>
+            XP rankings
+          </p>
+        </div>
+        <UpgradeGate
+          feature="Leaderboard"
+          requiredTier="Nomad"
+          description="See how you stack up against other nomads. XP rankings, archetype badges, and level progression — all in one view."
+        />
+      </div>
+    );
+  }
 
   const { data: topUsers } = await supabase
     .from("users")

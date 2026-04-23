@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
 import CheckInForm from "./CheckInForm";
 import PodActions from "./PodActions";
+import UpgradeGate from "@/components/UpgradeGate";
 
 const MOOD_EMOJI: Record<string, string> = {
   energised: "⚡", focused: "🎯", grateful: "🙏",
@@ -27,6 +28,33 @@ export default async function PodPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/sign-in");
+
+  const { data: userProfile } = await supabase
+    .from("users")
+    .select("tier")
+    .eq("id", user.id)
+    .single();
+
+  const userTier = (userProfile?.tier as string) ?? "free";
+  if (userTier === "free") {
+    return (
+      <div className="px-5 pt-6 pb-6 max-w-lg mx-auto flex flex-col gap-5">
+        <div>
+          <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "2.2rem", fontWeight: 500, color: "#1a1a18", lineHeight: 1.2 }}>
+            Pod
+          </h1>
+          <p className="text-xs tracking-widest uppercase mt-1" style={{ color: "#0F6E56", fontFamily: "var(--font-jost)" }}>
+            Accountability circle
+          </p>
+        </div>
+        <UpgradeGate
+          feature="Pod Access"
+          requiredTier="Nomad"
+          description="Create or join a pod of up to 5 nomads. Share daily check-ins, track moods, and hold each other accountable in real time."
+        />
+      </div>
+    );
+  }
 
   const { data: membership } = await supabase
     .from("pod_members")
